@@ -4,66 +4,692 @@ $(function(){
   // http://www.lombardinetworks.net/lombardi.owl
   // convention: map wordcased name to css class
   var LINK_TYPE = {
-    Association: 0,
-    InfluenceControl: 1,
+    Association: "assocation",
+    InfluenceControl: "influence-control",
     FinancialTransaction: "financial-transaction",
+    FinancialServiceProvider: "financial-bidirectional",
   }
 
   // array of {source, target, type}
   var links = [
-    {source: "Microsoft", target: "Amazon", type: "licensing"},
-    {source: "Microsoft", target: "HTC", type: "licensing"},
-    {source: "Samsung", target: "Apple", type: "suit"},
-    {source: "Motorola", target: "Apple", type: "suit"},
-    {source: "Nokia", target: "Apple", type: LINK_TYPE.FinancialTransaction},
-    {source: "HTC", target: "Apple", type: "suit"},
-    {source: "Kodak", target: "Apple", type: "suit"},
-    {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
-    {source: "Microsoft", target: "Foxconn", type: "suit"},
-    {source: "Oracle", target: "Google", type: "suit"},
-    {source: "Apple", target: "HTC", type: "suit"},
-    {source: "Microsoft", target: "Inventec", type: "suit"},
-    {source: "Samsung", target: "Kodak", type: LINK_TYPE.FinancialTransaction},
-    {source: "LG", target: "Kodak", type: LINK_TYPE.FinancialTransaction},
-    {source: "RIM", target: "Kodak", type: "suit"},
-    {source: "Sony", target: "LG", type: "suit"},
-    {source: "Kodak", target: "LG", type: LINK_TYPE.FinancialTransaction},
-    {source: "Apple", target: "Nokia", type: LINK_TYPE.FinancialTransaction},
-    {source: "Qualcomm", target: "Nokia", type: LINK_TYPE.FinancialTransaction},
-    {source: "Apple", target: "Motorola", type: "suit"},
-    {source: "Microsoft", target: "Motorola", type: "suit"},
-    {source: "Motorola", target: "Microsoft", type: "suit"},
-    {source: "Huawei", target: "ZTE", type: "suit"},
-    {source: "Ericsson", target: "ZTE", type: "suit"},
-    {source: "Kodak", target: "Samsung", type: LINK_TYPE.FinancialTransaction},
-    {source: "Apple", target: "Samsung", type: "suit"},
-    {source: "Kodak", target: "RIM", type: "suit"},
-    {source: "Nokia", target: "Qualcomm", type: "suit"}
+    {
+      source: "Donald Trump",
+      target: "Peter Thiel",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Donald Trump",
+      target: "Jared Kushner",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Donald Trump",
+      target: "Stephen Bannon",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Donald Trump",
+      target: "Elon Musk",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Jared Kushner",
+      target: "Joshua Kushner",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Joshua Kushner",
+      target: "Thrive Capital",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Joshua Kushner",
+      target: "Oscar Health",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Thrive Capital",
+      target: "Oscar Health",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Jared Kushner",
+      target: "Thrive Capital",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Joshua Kushner",
+      target: "Kickstarter",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Jared Kushner",
+      target: "Kickstarter",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Etsy",
+      target: "Kushner Properties",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Jared Kushner",
+      target: "Kushner Properties",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Thrive Capital",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Elon Musk",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Elon Musk",
+      target: "Tesla",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Elon Musk",
+      target: "SpaceX",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "IRS",
+      target: "SpaceX",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Facebook",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Y Combinator",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Palantir",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "FBI",
+      target: "Palantir",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "IRS",
+      target: "FBI",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Peter Thiel",
+      target: "Founders Fund",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Founders Fund",
+      target: "Airbnb",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Y Combinator",
+      target: "Airbnb",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Y Combinator",
+      target: "Stripe",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "Oscar Health",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "Facebook",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "SpaceX",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "Palantir",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "Spotify",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Spotify",
+      target: "Facebook",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Founders Fund",
+      target: "Stripe",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Stripe",
+      target: "Kickstarter",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Stripe",
+      target: "Shopify",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Shopify",
+      target: "Breitbart",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Google",
+      target: "Breitbart",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Stephen Bannon",
+      target: "Breitbart",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Thrive Capital",
+      target: "Stripe",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Thrive Capital",
+      target: "Instagram",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Facebook",
+      target: "Instagram",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Thrive Capital",
+      target: "Hot Potato",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Jared Kushner",
+      target: "Hot Potato",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Facebook",
+      target: "Hot Potato",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "News Corp",
+      target: "AppNexus",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "AppNexus",
+      target: "Breitbart",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Rupert Murdoch",
+      target: "News Corp",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Elaine Chao",
+      target: "News Corp",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Donald Trump",
+      target: "Elaine Chao",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Donald Trump",
+      target: "Rupert Murdoch",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Donald Trump",
+      target: "Travis Kalanick",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Travis Kalanick",
+      target: "Uber",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "News Corp",
+      target: "Harper Collins",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "News Corp",
+      target: "New York Post",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Rupert Murdoch",
+      target: "21st Century Fox",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Amazon",
+      target: "Breitbart",
+      type: LINK_TYPE.FinancialServiceProvider,
+    },
+    {
+      source: "Donald Trump",
+      target: "Indra Nooyi",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Indra Nooyi",
+      target: "PepsiCo",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Donald Trump",
+      target: "Doug McMillon",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Doug McMillon",
+      target: "Walmart",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Donald Trump",
+      target: "Ginni Rometty",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Ginni Rometty",
+      target: "IBM",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Donald Trump",
+      target: "Mary Barra",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Mary Barra",
+      target: "General Motors",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Donald Trump",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Nordstrom",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Amazon",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Walmart",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    ////////////////////////////////////////////
+    {
+      source: "You",
+      target: "Facebook",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Kickstarter",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Etsy",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "IRS",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Airbnb",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Spotify",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Shopify",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Google",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Tesla",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Oscar Health",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Instagram",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Uber",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Harper Collins",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "New York Post",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "21st Century Fox",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Amazon",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "PepsiCo",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Walmart",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "IBM",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "General Motors",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Nordstrom",
+      type: LINK_TYPE.FinancialTransaction,
+    },
   ];
 
   // http://www.lombardinetworks.net/lombardi.owl
   var NODE_TYPE = {
     Person: "person",
-    Institution: "institution",
+    Organization: "organization",
+    Product: "product"
   }
 
   // map of name to {name, type}
-  var nodes = {};
+  var nodes = {
+    "You": {
+      name: "You",
+      type: NODE_TYPE.Person,
+    },
+    "Donald Trump": {
+      name: "Donald Trump",
+      type: NODE_TYPE.Person,
+    },
+    "Peter Thiel": {
+      name: "Peter Thiel",
+      type: NODE_TYPE.Person,
+    },
+    "Jared Kushner": {
+      name: "Jared Kushner",
+      type: NODE_TYPE.Person,
+    },
+    "Joshua Kushner": {
+      name: "Joshua Kushner",
+      type: NODE_TYPE.Person,
+    },
+    "Stephen Bannon": {
+      name: "Stephen Bannon",
+      type: NODE_TYPE.Person,
+    },
+    "Thrive Capital": {
+      name: "Thrive Capital",
+      type: NODE_TYPE.Organization,
+    },
+    "Facebook": {
+      name: "Facebook",
+      type: NODE_TYPE.Organization,
+    },
+    "Y Combinator": {
+      name: "Y Combinator",
+      type: NODE_TYPE.Organization,
+    },
+    "Kickstarter": {
+      name: "Kickstarter",
+      type: NODE_TYPE.Organization,
+    },
+    "Etsy": {
+      name: "Etsy",
+      type: NODE_TYPE.Organization,
+    },
+    "Kushner Properties": {
+      name: "Kushner Properties",
+      type: NODE_TYPE.Organization,
+    },
+    "Elon Musk": {
+      name: "Elon Musk",
+      type: NODE_TYPE.Person,
+    },    
+    "SpaceX": {
+      name: "SpaceX",
+      type: NODE_TYPE.Organization,
+    },
+    "IRS": {
+      name: "IRS",
+      type: NODE_TYPE.Organization,
+    },
+    "Palantir": {
+      name: "Palantir",
+      type: NODE_TYPE.Organization,
+    },
+    "FBI": {
+      name: "FBI",
+      type: NODE_TYPE.Organization,
+    },
+    "Founders Fund": {
+      name: "Founders Fund",
+      type: NODE_TYPE.Organization,
+    },
+    "Airbnb": {
+      name: "Airbnb",
+      type: NODE_TYPE.Organization,
+    },
+    "Spotify": {
+      name: "Spotify",
+      type: NODE_TYPE.Organization,
+    },
+    "Stripe": {
+      name: "Stripe",
+      type: NODE_TYPE.Organization,
+    },
+    "Shopify": {
+      name: "Shopify",
+      type: NODE_TYPE.Organization,
+    },
+    "Breitbart": {
+      name: "Breitbart",
+      type: NODE_TYPE.Organization,
+    },
+    "Google": {
+      name: "Google",
+      type: NODE_TYPE.Organization,
+    },
+    "Tesla": {
+      name: "Tesla",
+      type: NODE_TYPE.Organization,
+    },
+    "Oscar Health": {
+      name: "Oscar Health",
+      type: NODE_TYPE.Organization,
+    },
+    "Instagram": {
+      name: "Instagram",
+      type: NODE_TYPE.Organization,
+    },
+    "Hot Potato": {
+      name: "Hot Potato",
+      type: NODE_TYPE.Organization,
+    },
+    "News Corp": {
+      name: "News Corp",
+      type: NODE_TYPE.Organization,
+    },
+    "AppNexus": {
+      name: "AppNexus",
+      type: NODE_TYPE.Organization,
+    },
+    "Rupert Murdoch": {
+      name: "Rupert Murdoch",
+      type: NODE_TYPE.Person,
+    },
+    "Elaine Chao": {
+      name: "Elaine Chao",
+      type: NODE_TYPE.Person,
+    },
+    "Travis Kalanick": {
+      name: "Travis Kalanick",
+      type: NODE_TYPE.Person,
+    },
+    "Uber": {
+      name: "Uber",
+      type: NODE_TYPE.Organization,
+    },
+    "Harper Collins": {
+      name: "Harper Collins",
+      type: NODE_TYPE.Organization,
+    },
+    "New York Post": {
+      name: "New York Post",
+      type: NODE_TYPE.Organization,
+    },
+    "21st Century Fox": {
+      name: "21st Century Fox",
+      type: NODE_TYPE.Organization,
+    },
+    "Amazon": {
+      name: "Amazon",
+      type: NODE_TYPE.Organization,
+    },
+    "Indra Nooyi": {
+      name: "Indra Nooyi",
+      type: NODE_TYPE.Person,
+    },
+    "PepsiCo": {
+      name: "PepsiCo",
+      type: NODE_TYPE.Organization,
+    },
+    "Doug McMillon": {
+      name: "Doug McMillon",
+      type: NODE_TYPE.Person,
+    },
+    "Walmart": {
+      name: "Walmart",
+      type: NODE_TYPE.Organization,
+    },
+    "Ginni Rometty": {
+      name: "Ginni Rometty",
+      type: NODE_TYPE.Person,
+    },
+    "IBM": {
+      name: "IBM",
+      type: NODE_TYPE.Organization,
+    },
+    "Mary Barra": {
+      name: "Mary Barra",
+      type: NODE_TYPE.Person,
+    },
+    "General Motors": {
+      name: "General Motors",
+      type: NODE_TYPE.Organization,
+    },
+    "Ivanka Trump": {
+      name: "Ivanka Trump",
+      type: NODE_TYPE.Person,
+    },
+    "Nordstrom": {
+      name: "Nordstrom",
+      type: NODE_TYPE.Organization,
+    },
+  };
 
+  var missing = {};
   // Compute the distinct nodes from the links.
   links.forEach(function(link) {
-    // TODO this is temporary
-    link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, type: NODE_TYPE.Institution});
-    link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, type: NODE_TYPE.Person});
-    /*
-    if (!(nodes[link.source] && nodes[link.target])) {
+    // link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, type: NODE_TYPE.Organization});
+    // link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, type: NODE_TYPE.Person});
+    
+    if (!nodes[link.source]) {
       // data isn't populated correctly
-      debugger;
+      missing[link.source] = true;
+    }
+    if (!nodes[link.target]) {
+      // data isn't populated correctly
+      missing[link.target] = true;
     }
     link.source = nodes[link.source];
     link.target = nodes[link.target];
-    */
+    
   });
+  missing = Object.keys(missing);
+  if (missing.length) {
+    console.log(missing);
+  }
 
   var width = $(window).width(),
       height = $(window).height();
@@ -90,9 +716,10 @@ $(function(){
   resize();
   d3.select(window).on("resize", resize);
 
+  // TODO association should be bidirectional
   // Per-type markers, as they don't inherit styles.
   svg.append("defs").selectAll("marker")
-      .data(["suit", "licensing", LINK_TYPE.FinancialTransaction])
+      .data([LINK_TYPE.Association, LINK_TYPE.InfluenceControl, LINK_TYPE.FinancialTransaction])
     .enter().append("marker")
       .attr("id", function(d) { return d; })
       .attr("viewBox", "0 -5 10 10")
@@ -120,8 +747,9 @@ $(function(){
       .call(force.drag);
     circle.append("text")
       .attr("text-anchor", "middle")
-      .attr("dy", 3)
-      .text(function(d) { return d.name; });
+      .attr("dy", 0.3)
+      .text(function(d) { return d.name; })
+      .call(wrap, 50);
 
   // Use elliptical arc path segments to doubly-encode directionality.
   function tick() {
@@ -139,5 +767,31 @@ $(function(){
   function transform(d) {
     return "translate(" + d.x + "," + d.y + ")";
   }
+
+  function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // em
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (line.length > 1 && tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        lineNumber++;
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", 1 * lineHeight + dy + "em").text(word);
+      }
+    }
+    text.attr("transform", "translate(0, " +(lineNumber * -7) + ")")
+  });
+}
 
 });
