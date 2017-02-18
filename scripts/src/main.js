@@ -8,6 +8,7 @@ $(function(){
     InfluenceControl: "influence-control",
     FinancialTransaction: "financial-transaction",
     FinancialServiceProvider: "financial-bidirectional",
+    Action: "action",
   }
 
   // array of {source, target, type}
@@ -278,16 +279,6 @@ $(function(){
       type: LINK_TYPE.InfluenceControl,
     },
     {
-      source: "News Corp",
-      target: "Harper Collins",
-      type: LINK_TYPE.InfluenceControl,
-    },
-    {
-      source: "News Corp",
-      target: "New York Post",
-      type: LINK_TYPE.InfluenceControl,
-    },
-    {
       source: "Rupert Murdoch",
       target: "21st Century Fox",
       type: LINK_TYPE.InfluenceControl,
@@ -357,6 +348,56 @@ $(function(){
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
     },
+    {
+      source: "Macy's",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Zappos",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Bloomingdale's",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Hudson's Bay",
+      target: "Ivanka Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "IRS",
+      target: "Donald Trump",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Donald Trump",
+      target: "Carl Icahn",
+      type: LINK_TYPE.Association,
+    },
+    {
+      source: "Carl Icahn",
+      target: "Icahn Enterprises",
+      type: LINK_TYPE.InfluenceControl,
+    },
+    {
+      source: "Icahn Enterprises",
+      target: "Lyft",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "Founders Fund",
+      target: "Lyft",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "General Motors",
+      target: "Lyft",
+      type: LINK_TYPE.FinancialTransaction,
+    },
     ////////////////////////////////////////////
     {
       source: "You",
@@ -420,16 +461,6 @@ $(function(){
     },
     {
       source: "You",
-      target: "Harper Collins",
-      type: LINK_TYPE.FinancialTransaction,
-    },
-    {
-      source: "You",
-      target: "New York Post",
-      type: LINK_TYPE.FinancialTransaction,
-    },
-    {
-      source: "You",
       target: "21st Century Fox",
       type: LINK_TYPE.FinancialTransaction,
     },
@@ -463,13 +494,100 @@ $(function(){
       target: "Nordstrom",
       type: LINK_TYPE.FinancialTransaction,
     },
+    {
+      source: "You",
+      target: "News Corp",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Lyft",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Macy's",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Zappos",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Bloomingdale's",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    {
+      source: "You",
+      target: "Hudson's Bay",
+      type: LINK_TYPE.FinancialTransaction,
+    },
+    //
+    {
+      source: "#DeleteUber",
+      target: "Uber",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#DeleteShopify",
+      target: "Shopify",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#DeleteAmazon",
+      target: "Amazon",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#GrabYourWallet",
+      target: "Nordstrom",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#GrabYourWallet",
+      target: "Macy's",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#GrabYourWallet",
+      target: "Zappos",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#GrabYourWallet",
+      target: "Bloomingdale's",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#GrabYourWallet",
+      target: "Hudson's Bay",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#DeleteLyft",
+      target: "Lyft",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#Baycott",
+      target: "Hudson's Bay",
+      type: LINK_TYPE.Action,
+    },
+    {
+      source: "#Resist",
+      target: "Donald Trump",
+      type: LINK_TYPE.Action,
+    },
   ];
 
   // http://www.lombardinetworks.net/lombardi.owl
   var NODE_TYPE = {
     Person: "person",
     Organization: "organization",
-    Product: "product"
+    Product: "product",
+    Action: "action"
   }
 
   // map of name to {name, type}
@@ -610,14 +728,6 @@ $(function(){
       name: "Uber",
       type: NODE_TYPE.Organization,
     },
-    "Harper Collins": {
-      name: "Harper Collins",
-      type: NODE_TYPE.Organization,
-    },
-    "New York Post": {
-      name: "New York Post",
-      type: NODE_TYPE.Organization,
-    },
     "21st Century Fox": {
       name: "21st Century Fox",
       type: NODE_TYPE.Organization,
@@ -666,6 +776,62 @@ $(function(){
       name: "Nordstrom",
       type: NODE_TYPE.Organization,
     },
+    "#DeleteUber": {
+      name: "#DeleteUber",
+      type: NODE_TYPE.Action,
+    },
+    "#DeleteShopify": {
+      name: "#DeleteShopify",
+      type: NODE_TYPE.Action,
+    },
+    "#DeleteAmazon": {
+      name: "#DeleteAmazon",
+      type: NODE_TYPE.Action,
+    },
+    "#GrabYourWallet": {
+      name: "#GrabYourWallet",
+      type: NODE_TYPE.Action,
+    },
+    "#DeleteLyft": {
+      name: "#DeleteLyft",
+      type: NODE_TYPE.Action,
+    },
+    "#Baycott": {
+      name: "#Baycott",
+      type: NODE_TYPE.Action,
+    },
+    "#Resist": {
+      name: "#Resist",
+      type: NODE_TYPE.Action,
+    },
+    "Carl Icahn": {
+      name: "Carl Icahn",
+      type: NODE_TYPE.Person,
+    },
+    "Icahn Enterprises": {
+      name: "Icahn Enterprises",
+      type: NODE_TYPE.Organization,
+    },
+    "Lyft": {
+      name: "Lyft",
+      type: NODE_TYPE.Organization,
+    },
+    "Bloomingdale's": {
+      name: "Bloomingdale's",
+      type: NODE_TYPE.Organization,
+    },
+    "Hudson's Bay": {
+      name: "Hudson's Bay",
+      type: NODE_TYPE.Organization,
+    },
+    "Zappos": {
+      name: "Zappos",
+      type: NODE_TYPE.Organization,
+    },
+    "Macy's": {
+      name: "Macy's",
+      type: NODE_TYPE.Organization,
+    },
   };
 
   var missing = {};
@@ -699,7 +865,9 @@ $(function(){
       .links(links)
       .size([width, height])
       .linkDistance(180)
+      .linkStrength(0.8)
       .charge(-800)
+      .alpha(0.2)
       .on("tick", tick)
       .start();
 
@@ -739,10 +907,10 @@ $(function(){
 
   var circle = svg.append("g").selectAll("circle")
       .data(force.nodes())
-    .enter().append("g");
+    .enter().append("g")
+      .attr("class", function(d) { return "node " + d.type; });
 
     circle.append("circle")
-      .attr("class", function(d) { return "node " + d.type; })
       .attr("r", 30)
       .call(force.drag);
     circle.append("text")

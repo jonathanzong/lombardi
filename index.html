@@ -13,17 +13,25 @@ text {
   max-width: 30px;
 }
 
-.node {
+.node circle {
   fill: white;
 }
 
-.node.person {
+.node.person circle {
   stroke-width: 0;
 }
 
-.node.organization {
+.node.organization circle {
   stroke: #999;
   stroke-width: 1px;
+}
+
+.node.action circle {
+  stroke-width: 0;
+}
+
+.node.action tspan {
+  fill: red;
 }
 
 .link {
@@ -34,6 +42,10 @@ text {
 
 .link.financial-transaction {
   stroke-dasharray: 0,2 1;
+}
+
+.link.action {
+  stroke: red;
 }
 
 </style>
