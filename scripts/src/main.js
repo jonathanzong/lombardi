@@ -860,16 +860,29 @@ $(function(){
   var width = $(window).width(),
       height = $(window).height();
 
+
+
+  function dragstart(d) {
+    d3.select(this).classed("fixed", d.fixed = true);
+  }
+
+  // Object.values(nodes).forEach(function(node) {
+  //   node.fixed = true;
+  // });
+
   var force = d3.layout.force()
       .nodes(d3.values(nodes))
       .links(links)
       .size([width, height])
-      .linkDistance(180)
-      .linkStrength(0.8)
-      .charge(-800)
-      .alpha(0.2)
+      .linkDistance(100)
+      // .linkStrength(0.5)
+      .charge(-100)
       .on("tick", tick)
       .start();
+
+
+  var drag = force.drag()
+    .on("dragstart", dragstart);
 
   var svg = d3.select("body").append("svg")
       .attr("width", width)
@@ -903,7 +916,8 @@ $(function(){
       .data(force.links())
     .enter().append("path")
       .attr("class", function(d) { return "link " + d.type; })
-      .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
+      .attr("marker-end", function(d) { return "url(#" + d.type + ")"; })
+      // .attr("marker-start", function(d) { return "url(#" + d.type + ")"; });
 
   var circle = svg.append("g").selectAll("circle")
       .data(force.nodes())
@@ -912,7 +926,7 @@ $(function(){
 
     circle.append("circle")
       .attr("r", 30)
-      .call(force.drag);
+      .call(drag);
     circle.append("text")
       .attr("text-anchor", "middle")
       .attr("dy", 0.3)
