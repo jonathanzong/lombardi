@@ -11,8 +11,9 @@ $(function(){
     node.y = Math.random() * 500;
   });
 
-  var load = JSON.parse(localStorage.getItem('LOMBARDI_NODES'));
+  var load = localStorage.getItem('LOMBARDI_NODES')
   if (load) {
+    load = JSON.parse(load);
     Object.keys(nodes).forEach(function(node) {
       nodes[node] = load[node];
     });
@@ -56,6 +57,8 @@ $(function(){
       .on("tick", tick)
       .start();
 
+  setTimeout(function() {force.stop(); console.log("stopped")}, 5000);
+
 
   var drag = force.drag()
     .on("dragstart", dragstart)
@@ -81,10 +84,10 @@ $(function(){
     }
 
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select(".svg-container").append("svg")
       // .attr("width", width)
       // .attr("height", height);
-      .attr("viewBox", "0 0 1440 777")
+      .attr("viewBox", "0 0 1152 777")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
   function resize() {
@@ -184,12 +187,14 @@ $(function(){
     circle.style('opacity', function(n) {
       return Object.keys(touchedNodes).indexOf(n.name) >= 0 ? 1 : 0.2;
     });
+    $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
   });
 
   // Set the stroke width back to normal when mouse leaves the node.
   circle.on('mouseout', function() {
     path.style('opacity', '');
     circle.style('opacity', '');
+    $('.ui-info').text('');
   });
 
   // Use elliptical arc path segments to doubly-encode directionality.

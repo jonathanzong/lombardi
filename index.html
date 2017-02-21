@@ -8,16 +8,16 @@
 <style>
 body, html {
   background: #EBE6D8;
+  font-family: "Karla", sans-serif;
 }
 
-svg {
+.svg-container svg {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
 text {
-  font-family: "Karla", sans-serif;
   font-size: 10px;
   pointer-events: none;
   display: block;
@@ -71,4 +71,58 @@ marker {
   fill: #999;
 }
 
+////
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.svg-container {
+  display: inline-block;
+  width: 80%;
+  height: 100%;
+  vertical-align: top;
+}
+
+.ui-container {
+  vertical-align: top;
+  display: inline-block;
+  width: 19%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.key-label {
+  font-size: 12px;
+}
+
+.ui-info {
+  margin-top: 30px;
+  border-left: 1px solid #6C6C6C;
+  padding-left: 5px;
+}
 </style>
+
+<div class="svg-container"></div>
+
+<div class="ui-container">
+  <div>
+    <svg height="10" width="50">
+      <path class="link" d="M0 7 l50 0"/>
+    </svg>
+    <span class="key-label">Financial Exchange</span>
+  </div>
+  <div>
+    <svg height="10" width="50">
+      <path class="link association" d="M0 7 l50 0"/>
+    </svg>
+    <span class="key-label">Association</span>
+  </div>
+  <div class="ui-info">
+  </div>
+</div>
