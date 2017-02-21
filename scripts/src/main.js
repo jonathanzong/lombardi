@@ -162,7 +162,7 @@ $(function(){
       .data(force.nodes())
     .enter().append("g")
       .attr("class", function(d) { return "node " + d.type; })
-      .call(drag);;
+      // .call(drag);
 
     circle.append("circle")
       .attr("r", 30)
@@ -244,6 +244,15 @@ $(function(){
       text.attr("transform", "translate(0, " +(lineNumber * -7) + ")")
     });
   }
+
+
+  $(".svg-container svg").svgPanZoom({
+    events: {
+        mouseWheel: false,
+        doubleClick: false
+    },
+  });
+
 
 });
 
