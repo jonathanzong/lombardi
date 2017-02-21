@@ -87,7 +87,7 @@ $(function(){
   var svg = d3.select(".svg-container").append("svg")
       // .attr("width", width)
       // .attr("height", height);
-      .attr("viewBox", "0 0 1152 777")
+      .attr("viewBox", "0 0 1152 737")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
   function resize() {
@@ -187,7 +187,7 @@ $(function(){
     circle.style('opacity', function(n) {
       return Object.keys(touchedNodes).indexOf(n.name) >= 0 ? 1 : 0.2;
     });
-    $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
+    // $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
   });
 
   // Set the stroke width back to normal when mouse leaves the node.
@@ -253,6 +253,10 @@ function saveState() {
 }
 
 function logState() {
+  // Object.keys(nodes).forEach(function(node) {
+  //   nodes[node].py -= 30;
+  //   nodes[node].y -= 30;
+  // });
   console.log(JSON.stringify(nodes));
 }
 
