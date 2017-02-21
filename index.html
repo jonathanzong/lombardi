@@ -1,20 +1,29 @@
-<link href="https://fonts.googleapis.com/css?family=Coming+Soon" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
 
 <script src="scripts/vendor/jquery-3.1.1.min.js"></script>
 <script src="scripts/vendor/d3.min.js"></script>
+<script src="scripts/src/data.js"></script>
 <script src="scripts/src/main.js"></script>
 
 <style>
+body, html {
+  background: #EBE6D8;
+}
+
 text {
-  font-family: 'Coming Soon', sans-serif;
+  font-family: "Karla", sans-serif;
   font-size: 10px;
   pointer-events: none;
   display: block;
   max-width: 30px;
 }
 
+tspan {
+  fill: #6C6C6C;
+}
+
 .node circle {
-  fill: white;
+  fill: #EBE6D8;
 }
 
 .node.person circle {
@@ -31,21 +40,29 @@ text {
 }
 
 .node.action tspan {
-  fill: red;
+  fill: #E34234;
 }
 
 .link {
   fill: none;
   stroke: #999;
   stroke-width: 1px;
+  opacity: 0.5;
+}
+
+.link.association {
+  stroke-dasharray: 0,2 1;
 }
 
 .link.financial-transaction {
-  stroke-dasharray: 0,2 1;
 }
 
 .link.action {
   stroke: red;
+}
+
+marker {
+  fill: #999;
 }
 
 </style>
