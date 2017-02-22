@@ -35,6 +35,8 @@ $(function(){
   }];
 
   function expandGraph() {
+    $('.intro-text').fadeOut();
+    simulation.restart();
     var a1 = $(nodes["You"]).animate({x:21, px: 21});
     var a2 = $(nodes["Donald Trump"]).animate({x:1121, px: 1121});
     $.when( a1, a2 ).then(function() {
@@ -199,7 +201,7 @@ $(function(){
     stopTimeout = setTimeout(function() {
       simulation.stop();
       console.log("stopped");
-    }, 5000);
+    }, 1000);
   }
 
   // Use elliptical arc path segments to doubly-encode directionality.
