@@ -68,13 +68,13 @@ $(function(){
 
   $(".svg-container svg").one('mouseup', function(){
     expandGraph();
-    $(this).svgPanZoom({
-      events: {
-        mouseWheel: false,
-        doubleClick: false
-      },
-    });
-    $(this).addClass("pannable");
+    // $(this).svgPanZoom({
+    //   events: {
+    //     mouseWheel: false,
+    //     doubleClick: false
+    //   },
+    // });
+    // $(this).addClass("pannable");
   });
 
 
