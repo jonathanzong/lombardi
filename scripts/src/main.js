@@ -161,23 +161,32 @@ $(function(){
       .merge(link);
 
      node.on('mouseover', function(d) {
-      var toPath = [d.name]; // TODO cache this stuff
-      for (var i = 0; i < d.neighbors.length; i++) {
-        if (d.neighbors[i].type == NODE_TYPE.Action) {
-          toPath.push(d.neighbors[i].name);
-        }
-        else {
-          if (d.neighbors[i].name !== "Donald Trump") {
-            var yPath = shortestPath(d.neighbors[i], nodes["You"], "Donald Trump");
-            toPath.push.apply(toPath, yPath);        
-          }
-          if (d.neighbors[i].name !== "You") {
-            var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"], "You");
-            toPath.push.apply(toPath, tPath);
-          }
-        }
+      if (d.name == "You" || d.name == "Donald Trump") {
+        link.transition().style("opacity", 1);
+        node.transition().style("opacity", 1);
+        return;
       }
-      link.transition().style("opacity",
+      var toPath = d.toPath;
+      if (!toPath) {
+        toPath = [d.name];
+        for (var i = 0; i < d.neighbors.length; i++) {
+          if (d.neighbors[i].type == NODE_TYPE.Action) {
+            toPath.push(d.neighbors[i].name);
+          }
+          else {
+            if (d.neighbors[i].name !== "Donald Trump") {
+              var yPath = shortestPath(d.neighbors[i], nodes["You"], "Donald Trump");
+              toPath.push.apply(toPath, yPath);        
+            }
+            if (d.neighbors[i].name !== "You") {
+              var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"], "You");
+              toPath.push.apply(toPath, tPath);
+            }
+          }
+        }
+        d.toPath = toPath;
+      }
+      link.transition().duration(150).style("opacity",
         function(l) {
           if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
             return 1;
@@ -186,7 +195,7 @@ $(function(){
             return 0.1;
           }
         });
-      node.transition().style("opacity",
+      node.transition().duration(150).style("opacity",
         function(n) {
           return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
         });
@@ -195,8 +204,8 @@ $(function(){
 
     // Set the stroke width back to normal when mouse leaves the node.
     node.on('mouseout', function() {
-      link.style('opacity', '');
-      node.style('opacity', '');
+      link.interrupt().style('opacity', '');
+      node.interrupt().style('opacity', '');
       $('.ui-info').text('');
     });
 

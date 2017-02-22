@@ -108,8 +108,12 @@ html {
   box-sizing: border-box;
 }
 
-.key-label {
+.legend {
   font-size: 12px;
+}
+
+.legend svg, .legend span{
+  display: inline-block;
 }
 
 .ui-info {
@@ -141,17 +145,17 @@ html {
 </div>
 
 <div class="ui-container" style="display: none">
-  <div>
+  <div class="legend">
     <svg height="10" width="50">
       <path class="link" d="M0 7 l50 0"/>
     </svg>
-    <span class="key-label">Financial Exchange</span>
+    <span>Financial Exchange</span>
   </div>
-  <div>
+  <div class="legend">
     <svg height="10" width="50">
       <path class="link association" d="M0 7 l50 0"/>
     </svg>
-    <span class="key-label">Association</span>
+    <span>Association</span>
   </div>
   <!-- <div class="ui-info">
   </div> -->
