@@ -167,10 +167,14 @@ $(function(){
   circle.on('mouseover', function(d) {
     var toPath = [d.name];
     for (var i = 0; i < d.neighbors.length; i++) {
-      var yPath = shortestPath(d.neighbors[i], nodes["You"]);
-      var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"]);
-      toPath.push.apply(toPath, yPath);
-      toPath.push.apply(toPath, tPath);
+      if (d.neighbors[i].name !== "Donald Trump") {
+        var yPath = shortestPath(d.neighbors[i], nodes["You"], "Donald Trump");
+        toPath.push.apply(toPath, yPath);        
+      }
+      if (d.neighbors[i].name !== "You") {
+        var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"], "You");
+        toPath.push.apply(toPath, tPath);
+      }
     }
     path.style('opacity', function(l) {
       if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
@@ -269,7 +273,7 @@ function clearState() {
   localStorage.setItem('LOMBARDI_NODES', '');
 }
 
-function shortestPath(source, target) {
+function shortestPath(source, target, excludeName) {
   if (source.name == target.name) {
     return [source.name];
   }
@@ -278,6 +282,9 @@ function shortestPath(source, target) {
       pred = {},
       tail = 0;
   visited[source.name] = true;
+  if (excludeName) {
+    visited[excludeName] = true;
+  }
   while (tail < queue.length) {
     var u = queue[tail++];
     for (var i = 0; i < u.neighbors.length; i++) {
