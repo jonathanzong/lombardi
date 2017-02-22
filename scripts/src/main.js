@@ -46,6 +46,9 @@ $(function(){
       restart();
       initData();
       restart();
+      setTimeout(function() {
+        simulation.stop();
+      }, 5000);
     });
   }
 
@@ -110,15 +113,15 @@ $(function(){
 
   restart();
 
-  var stopTimeout;
-
   function restart() {
     // Apply the general update pattern to the nodes.
     node = node.data(d3.values(nodes), function(d) { return d.name;});
     node.exit().remove();
 
     node = node.enter().append("g")
-        .attr("class", function(d) { return "node " + d.type; });
+        .attr("class", function(d) { return "node " + d.type; })
+        .attr("opacity", 0)
+        .call(function(node) { node.transition().duration(300).attr("opacity", 1); });
     node.append("circle")
         .attr("r", 30);
     node.append("text")
@@ -133,7 +136,7 @@ $(function(){
 
     // Keep the exiting links connected to the moving remaining nodes.
     link.exit().transition()
-        .attr("stroke-opacity", 0)
+        .attr("opacity", 0)
         .remove();
 
     link = link.enter().append("path")
@@ -152,7 +155,8 @@ $(function(){
             return "url(#markerstart)";
           }
         })
-        .call(function(link) { link.transition().attr("stroke-opacity", 1); })
+        .style("opacity", 0)
+        .call(function(link) { link.transition().style("opacity", 0.5).duration(500); })
       .merge(link);
 
      node.on('mouseover', function(d) {
@@ -197,11 +201,6 @@ $(function(){
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", tick).restart();
-    if (stopTimeout) clearTimeout(stopTimeout);
-    stopTimeout = setTimeout(function() {
-      simulation.stop();
-      console.log("stopped");
-    }, 1000);
   }
 
   // Use elliptical arc path segments to doubly-encode directionality.
