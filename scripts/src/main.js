@@ -3,13 +3,6 @@
 $(function(){
   // http://www.lombardinetworks.net/lombardi.owl
   // convention: map wordcased name to css class
-  
-  // var DOT = "digraph trump {";
-
-  Object.values(nodes).forEach(function(node) {
-    node.x = Math.random() * 500;
-    node.y = Math.random() * 500;
-  });
 
   var load = localStorage.getItem('LOMBARDI_NODES')
   if (load) {
@@ -24,10 +17,6 @@ $(function(){
   links.forEach(function(link) {
     // link.source = nodes[link.source] || (nodes[link.source] = {name: link.source, type: NODE_TYPE.Organization});
     // link.target = nodes[link.target] || (nodes[link.target] = {name: link.target, type: NODE_TYPE.Person});
-    // DOT += "\""+link.source + "\" -> \"" + link.target + "\";";
-    // if (link.type == LINK_TYPE.Association) {
-    //   DOT += "\""+link.target + "\" -> \"" + link.source + "\";";
-    // }
     if (!nodes[link.source]) {
       // data isn't populated correctly
       missing[link.source] = true;
@@ -38,8 +27,11 @@ $(function(){
     }
     link.source = nodes[link.source];
     link.target = nodes[link.target];
+    if (!link.source.neighbors) link.source.neighbors = [];
+    if (!link.target.neighbors) link.target.neighbors = [];
+    link.source.neighbors.push(link.target);
+    link.target.neighbors.push(link.source);
   });
-  // console.log(DOT + "}");
   missing = Object.keys(missing);
   if (missing.length) {
     console.log(missing);
@@ -173,11 +165,15 @@ $(function(){
       .call(wrap, 50);
 
   circle.on('mouseover', function(d) {
-    var touchedNodes = {};
+    var toPath = [d.name];
+    for (var i = 0; i < d.neighbors.length; i++) {
+      var yPath = shortestPath(d.neighbors[i], nodes["You"]);
+      var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"]);
+      toPath.push.apply(toPath, yPath);
+      toPath.push.apply(toPath, tPath);
+    }
     path.style('opacity', function(l) {
-      if (d === l.source || d === l.target) {
-        touchedNodes[l.source.name] = true;
-        touchedNodes[l.target.name] = true;
+      if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
         return 1;
       }
       else {
@@ -185,7 +181,7 @@ $(function(){
       }
     });
     circle.style('opacity', function(n) {
-      return Object.keys(touchedNodes).indexOf(n.name) >= 0 ? 1 : 0.2;
+      return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
     });
     // $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
   });
@@ -271,4 +267,36 @@ function logState() {
 
 function clearState() {
   localStorage.setItem('LOMBARDI_NODES', '');
+}
+
+function shortestPath(source, target) {
+  if (source.name == target.name) {
+    return [source.name];
+  }
+  var queue = [source],
+      visited = {},
+      pred = {},
+      tail = 0;
+  visited[source.name] = true;
+  while (tail < queue.length) {
+    var u = queue[tail++];
+    for (var i = 0; i < u.neighbors.length; i++) {
+      // try all neighbors
+      var v = u.neighbors[i];
+      if (visited[v.name]) continue;
+      visited[v.name] = true;
+      if (v.name == target.name) {
+        var path = [v.name];
+        while (u.name !== source.name) {
+          path.push(u.name);
+          u = pred[u.name];
+        }
+        path.push(u.name);
+        return path;
+      }
+      pred[v.name] = u;
+      queue.push(v);
+    }
+  }
+  return [];
 }
