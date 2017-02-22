@@ -92,9 +92,10 @@ function restart() {
   // Apply the general update pattern to the nodes.
   node = node.data(d3.values(nodes), function(d) { return d.name;});
 
-  node.exit().transition()
-      .selectAll("circle").attr("r", 0) ///////
-      .remove();
+  // node.exit().transition()
+  //     .selectAll("circle").attr("r", 0) ///////
+      // .remove();
+  node.exit().remove();
 
   node = node.enter().append("g")
       .attr("class", function(d) { return "node " + d.type; });
@@ -178,10 +179,25 @@ function restart() {
   simulation.nodes(nodes);
   simulation.force("link").links(links);
   simulation.alpha(1).restart();
-  setTimeout(function() {
+  d3.timeout(function() {
     simulation.stop();
+    console.log("stopped");
   }, 1000);
 }
+
+d3.timeout(function() {
+  Object.keys(nodes).forEach(function (i) {
+    if (i !== 'You' && i !== 'Donald Trump') {
+      delete nodes[i];
+    }
+  });
+  links = [{
+    source: nodes["You"],
+    target: nodes["Donald Trump"],
+    type: LINK_TYPE.FinancialTransaction
+  }];
+  restart();
+}, 1000);
 
   // Use elliptical arc path segments to doubly-encode directionality.
   function tick() {
