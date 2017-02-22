@@ -39,42 +39,10 @@ $(function(){
 
   var width = window.innerWidth, height = window.innerHeight;
 
-  var force = d3.layout.force()
-      .nodes(d3.values(nodes))
-      .links(links)
-      .size([width, height])
-      .linkDistance(100)
-      .linkStrength(0.5)
-      .charge(-1600)
-      .on("tick", tick)
-      .start();
-
-  setTimeout(function() {force.stop(); console.log("stopped")}, 5000);
-
-
-  var drag = force.drag()
-    .on("dragstart", dragstart)
-        .on("drag", dragmove)
-        .on("dragend", dragend);
-
-        function dragstart(d, i) {
-        force.stop() // stops the force auto positioning before you start dragging
-    }
-
-    function dragmove(d, i) {
-        d.px += d3.event.dx;
-        d.py += d3.event.dy;
-        d.x += d3.event.dx;
-        d.y += d3.event.dy; 
-        tick(); // this is the key to make it work together with updating both px,py,x,y on d !
-    }
-
-    function dragend(d, i) {
-        d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-        tick();
-        // force.resume();
-    }
-
+  var simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).distance(200))
+    .alphaTarget(1)
+    .on("tick", tick);
 
   var svg = d3.select(".svg-container").append("svg")
       // .attr("width", width)
@@ -82,20 +50,6 @@ $(function(){
       .attr("viewBox", "0 0 1152 737")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
-  function resize() {
-    // var oldWidth = width, oldHeight = height;
-    width = window.innerWidth, height = window.innerHeight;
-    // if (width > oldWidth || height > oldHeight) {
-      // svg.attr("viewBox", "0 0 " + width + " " + height )
-    // }
-    // svg.attr("width", width).attr("height", height);
-
-      // svg.attr("viewBox", "0 0 " + width + " " + height )
-    // force.size([width, height]).resume();
-  }
-
-  // resize();
-  // d3.select(window).on("resize", resize);
 
   // TODO association should be bidirectional
   // Per-type markers, as they don't inherit styles.
@@ -127,9 +81,41 @@ $(function(){
     .append("path")
       .attr("d", "M0,0L10,5L10,-5Z");
 
-  var path = svg.append("g").selectAll("path")
-      .data(force.links())
-    .enter().append("path")
+  var g = svg.append("g");
+  var link = g.append("g").selectAll("path");
+  var node = g.append("g").selectAll("circle");
+
+  restart();
+
+function restart() {
+
+  // Apply the general update pattern to the nodes.
+  node = node.data(d3.values(nodes), function(d) { return d.name;});
+
+  node.exit().transition()
+      .selectAll("circle").attr("r", 0) ///////
+      .remove();
+
+  node = node.enter().append("g")
+      .attr("class", function(d) { return "node " + d.type; });
+  node.append("circle")
+      .call(function(node) { node.transition().attr("r", 30); })
+  node.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", 0.3)
+      .text(function(d) { return d.name; })
+      .call(wrap, 50);
+  node = node.merge(node);
+
+  // Apply the general update pattern to the links.
+  link = link.data(links, function(d) { return d.source.name + "-" + d.target.name; });
+
+  // Keep the exiting links connected to the moving remaining nodes.
+  link.exit().transition()
+      .attr("stroke-opacity", 0)
+      .remove();
+
+  link = link.enter().append("path")
       .attr("class", function(d) { return "link " + d.type; })
       .attr("marker-end", function(d) {
         if (d.type == LINK_TYPE.Association ||
@@ -139,44 +125,35 @@ $(function(){
           return "url(#markerend)";
         }
       })
-      // .attr("x1", function(d) {return d.source.x; })
-      // .attr("y1", function(d) {return d.source.y; })
-      // .attr("x2", function(d) {return d.target.x; })
-      // .attr("y2", function(d) {return d.target.y; })
       .attr("marker-start", function(d) {
         if (d.type == LINK_TYPE.Association ||
             d.type == LINK_TYPE.FinancialServiceProvider) {
           return "url(#markerstart)";
         }
-      });
+      })
+      .call(function(link) { link.transition().attr("stroke-opacity", 1); })
+    .merge(link);
 
-  var circle = svg.append("g").selectAll("circle")
-      .data(force.nodes())
-    .enter().append("g")
-      .attr("class", function(d) { return "node " + d.type; })
-      // .call(drag);
 
-    circle.append("circle")
-      .attr("r", 30)
-    circle.append("text")
-      .attr("text-anchor", "middle")
-      .attr("dy", 0.3)
-      .text(function(d) { return d.name; })
-      .call(wrap, 50);
 
-  circle.on('mouseover', function(d) {
+  node.on('mouseover', function(d) {
     var toPath = [d.name];
     for (var i = 0; i < d.neighbors.length; i++) {
-      if (d.neighbors[i].name !== "Donald Trump") {
-        var yPath = shortestPath(d.neighbors[i], nodes["You"], "Donald Trump");
-        toPath.push.apply(toPath, yPath);        
+      if (d.neighbors[i].type == NODE_TYPE.Action) {
+        toPath.push(d.neighbors[i].name);
       }
-      if (d.neighbors[i].name !== "You") {
-        var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"], "You");
-        toPath.push.apply(toPath, tPath);
+      else {
+        if (d.neighbors[i].name !== "Donald Trump") {
+          var yPath = shortestPath(d.neighbors[i], nodes["You"], "Donald Trump");
+          toPath.push.apply(toPath, yPath);        
+        }
+        if (d.neighbors[i].name !== "You") {
+          var tPath = shortestPath(d.neighbors[i], nodes["Donald Trump"], "You");
+          toPath.push.apply(toPath, tPath);
+        }
       }
     }
-    path.style('opacity', function(l) {
+    link.style('opacity', function(l) {
       if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
         return 1;
       }
@@ -184,28 +161,37 @@ $(function(){
         return 0.1;
       }
     });
-    circle.style('opacity', function(n) {
+    node.style('opacity', function(n) {
       return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
     });
     // $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
   });
 
   // Set the stroke width back to normal when mouse leaves the node.
-  circle.on('mouseout', function() {
-    path.style('opacity', '');
-    circle.style('opacity', '');
+  node.on('mouseout', function() {
+    link.style('opacity', '');
+    node.style('opacity', '');
     $('.ui-info').text('');
   });
 
+  // Update and restart the simulation.
+  simulation.nodes(nodes);
+  simulation.force("link").links(links);
+  simulation.alpha(1).restart();
+  setTimeout(function() {
+    simulation.stop();
+  }, 1000);
+}
+
   // Use elliptical arc path segments to doubly-encode directionality.
   function tick() {
-    path.attr("d", linkArc);
+    link.attr("d", linkArc);
 
       // path.attr("x1", function(d) { return d.source.x; })
       //     .attr("y1", function(d) { return d.source.y; })
       //     .attr("x2", function(d) { return d.target.x; })
       //     .attr("y2", function(d) { return d.target.y; });
-    circle.attr("transform", transform);
+    node.attr("transform", transform);
   }
 
   function linkArc(d) {
