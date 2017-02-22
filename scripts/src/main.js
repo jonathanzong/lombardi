@@ -177,17 +177,19 @@ $(function(){
           }
         }
       }
-      link.style('opacity', function(l) {
-        if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
-          return 1;
-        }
-        else {
-          return 0.1;
-        }
-      });
-      node.style('opacity', function(n) {
-        return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
-      });
+      link.transition().style("opacity",
+        function(l) {
+          if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
+            return 1;
+          }
+          else {
+            return 0.1;
+          }
+        });
+      node.transition().style("opacity",
+        function(n) {
+          return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
+        });
       // $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
     });
 
