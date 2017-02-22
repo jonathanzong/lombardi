@@ -37,7 +37,11 @@ $(function(){
   function expandGraph() {
     var a1 = $(nodes["You"]).animate({x:21, px: 21});
     var a2 = $(nodes["Donald Trump"]).animate({x:1121, px: 1121});
-    $.when( a1, a2 ).done(function() {
+    $.when( a1, a2 ).then(function() {
+      simulation.stop();
+      nodes = {};
+      links = [];
+      restart();
       initData();
       restart();
     });
@@ -56,7 +60,7 @@ $(function(){
       .attr("viewBox", "0 0 1152 737")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
-  $(".svg-container svg").one('click', function(){
+  $(".svg-container svg").one('mouseup', function(){
     expandGraph();
     $(this).svgPanZoom({
       events: {
@@ -103,6 +107,8 @@ $(function(){
   var node = g.append("g").selectAll("circle");
 
   restart();
+
+  var stopTimeout;
 
   function restart() {
     // Apply the general update pattern to the nodes.
@@ -189,7 +195,8 @@ $(function(){
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).on("tick", tick).restart();
-    d3.timeout(function() {
+    if (stopTimeout) clearTimeout(stopTimeout);
+    stopTimeout = setTimeout(function() {
       simulation.stop();
       console.log("stopped");
     }, 5000);
