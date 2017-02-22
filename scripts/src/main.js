@@ -46,6 +46,7 @@ $(function(){
       restart();
       initData();
       restart();
+      $('.ui-container').fadeIn(500);
       setTimeout(function() {
         simulation.stop();
       }, 5000);
