@@ -83,11 +83,6 @@ $(function(){
       .attr("viewBox", "0 0 1152 737")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
-  $(".svg-container svg").one('mouseup', function(){
-    expandGraph();
-  });
-
-
   // TODO association should be bidirectional
   // Per-type markers, as they don't inherit styles.
   svg.append("defs").selectAll("marker")
@@ -125,6 +120,9 @@ $(function(){
   var colorScale = d3.scaleOrdinal(d3.schemeCategory20);
 
   restart();
+  $(".svg-container svg > g").one('click', function(){
+    expandGraph();
+  });
 
   function restart() {
     // Apply the general update pattern to the nodes.

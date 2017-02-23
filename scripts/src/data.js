@@ -1226,6 +1226,7 @@ function initData() {
     "#GrabYourWallet": {
       "name": "#GrabYourWallet",
       "type": "action",
+      "link": "https://grabyourwallet.org/",
       "x": 399.94857230801,
       "y": 14.868641315202,
       "index": 49,
