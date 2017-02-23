@@ -112,6 +112,8 @@ $(function(){
   var link = g.append("g").selectAll("path");
   var node = g.append("g").selectAll("circle");
 
+  var colorScale = d3.scaleOrdinal(d3.schemeCategory20);
+
   restart();
 
   function restart() {
@@ -186,27 +188,42 @@ $(function(){
         }
         d.toPath = toPath;
       }
-      link.transition().duration(150).style("opacity",
-        function(l) {
+      var colorIdx = 0;
+      $('.legend').hide();
+      link.transition().duration(150).style("opacity", function(l) {
           if (toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
             return 1;
           }
           else {
             return 0.1;
           }
+        })
+        .style("stroke", function(l) {
+          if (l.annotation && toPath.indexOf(l.source.name) >= 0 && toPath.indexOf(l.target.name) >= 0) {
+            var color = colorScale(colorIdx++);
+            var div = d3.select('.ui-container').append('div').attr('class', 'legend legend-hover');
+            div.append('svg')
+              .attr('height', 10)
+              .attr('width', 50)
+              .append('path')
+                .attr('class', 'link')
+                .attr('d', "M0 7 l50 0")
+                .style('stroke', color);
+            div.append('span').text(l.annotation)
+            return color;
+          }
         });
-      node.transition().duration(150).style("opacity",
-        function(n) {
+      node.transition().duration(150).style("opacity", function(n) {
           return toPath.indexOf(n.name) >= 0 ? 1 : 0.2;
         });
-      // $('.ui-info').text(d.name + ' insert citation / explanation here'); // TODO
     });
 
     // Set the stroke width back to normal when mouse leaves the node.
     node.on('mouseout', function() {
-      link.interrupt().style('opacity', '');
-      node.interrupt().style('opacity', '');
-      $('.ui-info').text('');
+      link.interrupt().style('opacity', 0.5).style('stroke', '');
+      node.interrupt().style('opacity', 1);
+      d3.select('.ui-container').selectAll('.legend-hover').remove();
+      $('.legend').show();
     });
 
     // Update and restart the simulation.

@@ -481,6 +481,18 @@ function initData() {
       type: LINK_TYPE.FinancialTransaction,
       annotation: "Chao has a federal salary"
     },
+    {
+      source: "Bob Iger",
+      target: "Disney",
+      type: LINK_TYPE.InfluenceControl,
+      annotation: "Iger is CEO of Disney"
+    },
+    {
+      source: "Donald Trump",
+      target: "Bob Iger",
+      type: LINK_TYPE.Association,
+      annotation: "Iger advises Trump"
+    },
     ////////////////////////////////////////////
     {
       source: "You",
@@ -667,16 +679,6 @@ function initData() {
       source: "#Resist",
       target: "Donald Trump",
       type: LINK_TYPE.Action,
-    },
-    {
-      source: "Bob Iger",
-      target: "Disney",
-      type: LINK_TYPE.InfluenceControl,
-    },
-    {
-      source: "Donald Trump",
-      target: "Bob Iger",
-      type: LINK_TYPE.Association,
     },
   ];
 
