@@ -217,7 +217,7 @@ $(function(){
               .attr('height', 10)
               .attr('width', 50)
               .append('path')
-                .attr('class', 'link')
+                .attr('class', "link "+l.type)
                 .attr('d', "M0 7 l50 0")
                 .style('stroke', color);
             div.append('span').text(l.annotation)
