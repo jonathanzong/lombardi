@@ -23,391 +23,463 @@ function initData() {
       source: "Donald Trump",
       target: "Peter Thiel",
       type: LINK_TYPE.Association,
+      annotation: "Thiel advises Trump"
     },
     {
       source: "Donald Trump",
       target: "Jared Kushner",
       type: LINK_TYPE.Association,
+      annotation: "Kushner is Trump's son-in-law"
     },
     {
       source: "Donald Trump",
       target: "Stephen Bannon",
       type: LINK_TYPE.Association,
+      annotation: "Bannon is Trump's chief strategist"
     },
     {
       source: "Donald Trump",
       target: "Elon Musk",
       type: LINK_TYPE.Association,
+      annotation: "Musk advises Trump"
     },
     {
       source: "Jared Kushner",
       target: "Joshua Kushner",
       type: LINK_TYPE.Association,
+      annotation: "Brothers"
     },
     {
       source: "Joshua Kushner",
       target: "Thrive Capital",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Josh Kushner founded Thrive"
     },
     {
       source: "Joshua Kushner",
       target: "Oscar Health",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Josh Kushner co-founded Oscar"
     },
     {
       source: "Thrive Capital",
       target: "Oscar Health",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thrive invests in Oscar"
     },
     {
       source: "Jared Kushner",
       target: "Thrive Capital",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Jared Kushner invests in Thrive"
     },
     {
-      source: "Joshua Kushner",
+      source: "Thrive Capital",
       target: "Kickstarter",
       type: LINK_TYPE.FinancialTransaction,
-    },
-    {
-      source: "Jared Kushner",
-      target: "Kickstarter",
-      type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thrive invests in Kickstarter"
     },
     {
       source: "Etsy",
       target: "Kushner Properties",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Etsy leases from Kushner Properties"
     },
     {
       source: "Jared Kushner",
       target: "Kushner Properties",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Jared Kushner founded Kushner Properties"
     },
     {
       source: "Peter Thiel",
       target: "Thrive Capital",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thiel invests in Thrive"
     },
     {
       source: "Peter Thiel",
       target: "Elon Musk",
       type: LINK_TYPE.Association,
+      annotation: "Members of the Paypal Mafia"
     },
     {
       source: "Elon Musk",
       target: "Tesla",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Musk founded Tesla"
     },
     {
       source: "Elon Musk",
       target: "SpaceX",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Musk founded SpaceX"
     },
     {
       source: "IRS",
       target: "SpaceX",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "SpaceX holds federal contracts"
     },
     {
       source: "Peter Thiel",
       target: "Facebook",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thiel is on the board of Facebook"
     },
     {
       source: "Peter Thiel",
       target: "Y Combinator",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Thiel is a part-time partner at Y Combinator"
     },
     {
       source: "Peter Thiel",
       target: "Palantir",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Thiel founded Palantir"
     },
     {
       source: "FBI",
       target: "Palantir",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "The FBI is a client of Palantir"
     },
     {
       source: "IRS",
       target: "FBI",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "The FBI is federally funded"
     },
     {
       source: "Peter Thiel",
       target: "Founders Fund",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Thiel founded Founders Fund"
     },
     {
       source: "Founders Fund",
       target: "Airbnb",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Airbnb"
     },
     {
       source: "Y Combinator",
       target: "Airbnb",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Y Combinator invests in Airbnb"
     },
     {
       source: "Y Combinator",
       target: "Stripe",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Y Combinator invests in Stripe"
     },
     {
       source: "Founders Fund",
       target: "Oscar Health",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Oscar"
     },
     {
       source: "Founders Fund",
       target: "Facebook",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Facebook"
     },
     {
       source: "Founders Fund",
       target: "SpaceX",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in SpaceX"
     },
     {
       source: "Founders Fund",
       target: "Palantir",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Palantir"
     },
     {
       source: "Founders Fund",
       target: "Spotify",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Spotify"
     },
     {
       source: "Spotify",
       target: "Facebook",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Spotify partners with Facebook"
     },
     {
       source: "Founders Fund",
       target: "Stripe",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Stripe"
     },
     {
       source: "Stripe",
       target: "Kickstarter",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Stripe processes payments for Kickstarter"
     },
     {
       source: "Stripe",
       target: "Shopify",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Stripe processes payments for Shopify"
     },
     {
       source: "Shopify",
       target: "Breitbart",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Stripe processes payments for Breitbart"
     },
     {
       source: "Google",
       target: "Breitbart",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Google advertises on Breitbart"
     },
     {
       source: "Stephen Bannon",
       target: "Breitbart",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Bannon is executive chair of Breitbart"
     },
     {
       source: "Thrive Capital",
       target: "Stripe",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thrive invests in Stripe"
     },
     {
       source: "Thrive Capital",
       target: "Instagram",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thrive invests in Instagram"
     },
     {
       source: "Facebook",
       target: "Instagram",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Facebook owns Instagram"
     },
     {
       source: "Thrive Capital",
       target: "Hot Potato",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Thrive invested in Hot Potato"
     },
     {
       source: "Jared Kushner",
       target: "Hot Potato",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Jared Kushner invested in Hot Potato"
     },
     {
       source: "Facebook",
       target: "Hot Potato",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Facebook owns Hot Potato"
     },
     {
       source: "News Corp",
       target: "AppNexus",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "News Corp invests in AppNexus"
     },
     {
       source: "AppNexus",
       target: "Breitbart",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "AppNexus advertises on Breitbart"
     },
     {
       source: "Rupert Murdoch",
       target: "News Corp",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Murdoch founded News Corp"
     },
     {
       source: "Elaine Chao",
       target: "News Corp",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Chao was on the board of News Corp"
     },
     {
       source: "Donald Trump",
       target: "Elaine Chao",
       type: LINK_TYPE.Association,
+      annotation: "Chao serves on Trump's cabinet"
     },
     {
       source: "Donald Trump",
       target: "Rupert Murdoch",
       type: LINK_TYPE.Association,
+      annotation: "Murdoch and Trump are close friends"
     },
     {
       source: "Donald Trump",
       target: "Travis Kalanick",
       type: LINK_TYPE.Association,
+      annotation: "Kalanick advised Trump"
     },
     {
       source: "Travis Kalanick",
       target: "Uber",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Kalanick founded Uber"
     },
     {
       source: "Rupert Murdoch",
       target: "21st Century Fox",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Murdoch owns Fox"
     },
     {
       source: "Amazon",
       target: "Breitbart",
       type: LINK_TYPE.FinancialServiceProvider,
+      annotation: "Amazon advertises on Breitbart"
     },
     {
       source: "Donald Trump",
       target: "Indra Nooyi",
       type: LINK_TYPE.Association,
+      annotation: "Nooyi advises Trump"
     },
     {
       source: "Indra Nooyi",
       target: "PepsiCo",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Nooyi is CEO of PepsiCo"
     },
     {
       source: "Donald Trump",
       target: "Doug McMillon",
       type: LINK_TYPE.Association,
+      annotation: "McMillon advises Trump"
     },
     {
       source: "Doug McMillon",
       target: "Walmart",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "McMillon is CEO of Walmart"
     },
     {
       source: "Donald Trump",
       target: "Ginni Rometty",
       type: LINK_TYPE.Association,
+      annotation: "Rometty advises Trump"
     },
     {
       source: "Ginni Rometty",
       target: "IBM",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Rometty is CEO of IBM"
     },
     {
       source: "Donald Trump",
       target: "Mary Barra",
       type: LINK_TYPE.Association,
+      annotation: "Barra advises Trump"
     },
     {
       source: "Mary Barra",
       target: "General Motors",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Barra is CEO of GM"
     },
     {
       source: "Donald Trump",
       target: "Ivanka Trump",
       type: LINK_TYPE.Association,
+      annotation: "Ivanka is Donald's daughter"
     },
     {
       source: "Jared Kushner",
       target: "Ivanka Trump",
       type: LINK_TYPE.Association,
+      annotation: "Kushner and Trump are married"
     },
     {
       source: "Nordstrom",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Nordstrom carried Trump apparel"
     },
     {
       source: "Amazon",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Amazon carries Trump apparel"
     },
     {
       source: "Walmart",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Walmart carries Trump apparel"
     },
     {
       source: "Macy's",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Macy's carries Trump apparel"
     },
     {
       source: "Zappos",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Zappos carries Trump apparel"
     },
     {
       source: "Hudson's Bay",
       target: "Ivanka Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Hudson's Bay carries Trump apparel"
     },
     {
       source: "IRS",
       target: "Donald Trump",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Trump has a federal salary"
     },
     {
       source: "Donald Trump",
       target: "Carl Icahn",
       type: LINK_TYPE.Association,
+      annotation: "Icahn advises Trump"
     },
     {
       source: "Carl Icahn",
       target: "Icahn Enterprises",
       type: LINK_TYPE.InfluenceControl,
+      annotation: "Icahn founded Icahn Enterprises"
     },
     {
       source: "Icahn Enterprises",
       target: "Lyft",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Icahn Enterprises invests in Lyft"
     },
     {
       source: "Founders Fund",
       target: "Lyft",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Founders Fund invests in Lyft"
     },
     {
       source: "General Motors",
       target: "Lyft",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "GM invests in Lyft"
     },
     {
       source: "IRS",
       target: "Elaine Chao",
       type: LINK_TYPE.FinancialTransaction,
+      annotation: "Chao has a federal salary"
     },
     ////////////////////////////////////////////
     {
