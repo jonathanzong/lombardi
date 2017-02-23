@@ -47,10 +47,26 @@ $(function(){
       initData();
       restart();
       $('.ui-container').fadeIn(500);
+      panIfSmall();
+      $(window).resize(panIfSmall);
       setTimeout(function() {
         simulation.stop();
       }, 5000);
     });
+  }
+  var panZoom;
+  function panIfSmall() {
+    if (!panZoom && ($(window).width() < 900 || $(window).height() < 576)) {
+      panZoom = $('.svg-container svg').svgPanZoom({
+        events: {
+          mouseWheel: false,
+          doubleClick: false
+        },
+      });
+    }
+    else if (panZoom) {
+      panZoom.reset();
+    }
   }
 
   var width = window.innerWidth, height = window.innerHeight;
@@ -68,13 +84,6 @@ $(function(){
 
   $(".svg-container svg").one('mouseup', function(){
     expandGraph();
-    // $(this).svgPanZoom({
-    //   events: {
-    //     mouseWheel: false,
-    //     doubleClick: false
-    //   },
-    // });
-    // $(this).addClass("pannable");
   });
 
 
