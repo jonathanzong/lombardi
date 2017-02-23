@@ -36,6 +36,7 @@ $(function(){
 
   function expandGraph() {
     $('.intro-text').fadeOut();
+    $('.svg-container').removeClass('intro');
     simulation.restart();
     var a1 = $(nodes["You"]).animate({x:21, px: 21});
     var a2 = $(nodes["Donald Trump"]).animate({x:1121, px: 1121});
@@ -134,9 +135,12 @@ $(function(){
         .attr("class", function(d) { return "node " + d.type; })
         .attr("opacity", 0)
         .call(function(node) { node.transition().duration(300).attr("opacity", 1); });
-    node.append("circle")
+    var a = node.append("a")
+      .attr("href", function(n) {return n.link})
+      .attr("target", "_blank");
+    a.append("circle")
         .attr("r", 30);
-    node.append("text")
+    a.append("text")
         .attr("text-anchor", "middle")
         .attr("dy", 0.3)
         .text(function(d) { return d.name; })
