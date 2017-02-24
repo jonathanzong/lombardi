@@ -1193,6 +1193,7 @@ function initData() {
     "#DeleteUber": {
       "name": "#DeleteUber",
       "type": "action",
+      "link": "https://twitter.com/hashtag/deleteuber",
       "x": 61.918589632025,
       "y": 134.72038960414,
       "index": 46,
@@ -1204,6 +1205,7 @@ function initData() {
     "#DeleteShopify": {
       "name": "#DeleteShopify",
       "type": "action",
+      "link": "https://twitter.com/hashtag/deleteshopify",
       "x": 244.16202038732,
       "y": 705.43895288441,
       "index": 47,
@@ -1215,6 +1217,7 @@ function initData() {
     "#DeleteAmazon": {
       "name": "#DeleteAmazon",
       "type": "action",
+      "link": "https://twitter.com/hashtag/deleteamazon",
       "x": 111.99986905486,
       "y": 78.29291050606,
       "index": 48,
@@ -1238,6 +1241,7 @@ function initData() {
     "#DeleteLyft": {
       "name": "#DeleteLyft",
       "type": "action",
+      "link": "https://twitter.com/hashtag/deletelyft",
       "x": 35.573309205146,
       "y": 212.42707205548,
       "index": 50,
@@ -1249,6 +1253,7 @@ function initData() {
     "#Baycott": {
       "name": "#Baycott",
       "type": "action",
+      "link": "https://twitter.com/hashtag/baycott",
       "x": 138.30104591227,
       "y": 18.145584392222,
       "index": 51,
