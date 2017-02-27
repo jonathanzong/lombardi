@@ -885,6 +885,7 @@ function initData() {
     "Airbnb": {
       "name": "Airbnb",
       "type": "organization",
+      "link": "http://www.airbnbhell.com/airbnb-competitors/",
       "x": 157.94971615464,
       "y": 378.11829224255,
       "index": 18,
@@ -940,6 +941,7 @@ function initData() {
     "Google": {
       "name": "Google",
       "type": "organization",
+      "link": "https://duckduckgo.com/",
       "x": 240.11169066082,
       "y": 608.24988756967,
       "index": 23,
@@ -1050,6 +1052,7 @@ function initData() {
     "Uber": {
       "name": "Uber",
       "type": "organization",
+      "link": "http://www.flywheel.com/",
       "x": 157.18806961594,
       "y": 231.0579695148,
       "index": 33,
@@ -1354,6 +1357,7 @@ function initData() {
     "Bob Iger": {
       "name": "Bob Iger",
       "type": "person",
+      "link": "https://twitter.com/hashtag/quitthecouncil",
       "x": 1021.5365402182,
       "y": 429.38701233268,
       "index": 60,
