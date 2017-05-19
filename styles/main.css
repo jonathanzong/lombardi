@@ -126,3 +126,72 @@ html {
   top: 30px;
   left: 15%;
 }
+
+.about-button {
+  font-size: 12px;
+  position: fixed;
+  bottom: 15px; right: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.about-button.intro {
+  right: 15%;
+}
+
+.about-container {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 15%;
+  right: 15%;
+  height: 80%;
+  background: rgba(255, 255, 255, 1);
+  padding: 30px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.about-container.active {
+  display: block;
+}
+
+.about-container .about-content {
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.about-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.about-container ul li {
+  display: inline-block;
+  cursor: pointer;
+}
+.about-container .select.active {
+  text-decoration: underline;
+}
+.about-container a {
+  text-decoration: none;
+  cursor: alias;
+  color: inherit;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

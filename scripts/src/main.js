@@ -37,6 +37,7 @@ $(function(){
   function expandGraph() {
     $('.intro-text').fadeOut();
     $('.svg-container').removeClass('intro');
+    $('.about-button').removeClass('intro');
     simulation.restart();
     var a1 = $(nodes["You"]).animate({x:21, px: 21});
     var a2 = $(nodes["Donald Trump"]).animate({x:1121, px: 1121});
@@ -290,6 +291,36 @@ $(function(){
       text.attr("transform", "translate(0, " +(lineNumber * -7) + ")")
     });
   }
+
+  $('.about-button').click(function() {
+    $('.about-container').toggleClass('active');
+    return false;
+  });
+
+  $(document).click(function(event) { 
+    if(!$(event.target).closest('.about-container').length) {
+      if($('.about-container').hasClass('active')) {
+        $('.about-container').removeClass('active');
+        return false;
+      }
+    }
+  })
+
+  $('.select-en').click(function() {
+    $('.fr').hide();
+    $('.en').show();
+    $('.select').removeClass('active');
+    $(this).addClass('active');
+    return false;
+  });
+
+  $('.select-fr').click(function() {
+    $('.en').hide();
+    $('.fr').show();
+    $('.select').removeClass('active');
+    $(this).addClass('active');
+    return false;
+  });
 
 });
 
